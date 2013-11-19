@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="de_DE:de:en_GB:en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Jakob Voß (VZG)" />
+  <meta name="date" content="2013-11-19" />
+  <title>The Service Ontology</title>
+  <link rel="alternate" type="application/rdf+xml" href="service.owl" />
+   <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <style type="text/css">
+  body { font-family: sans-serif; }
+  a { text-decoration: none }
+  a:hover { text-decoration: underline }
+  h1 { font: 170% sans-serif }
+  h1.title { font-size: 200%; font-weight: bold; }
+  h2 { font: 140% sans-serif }
+  h3 { font: 120% sans-serif }
+  dt { font-weight: bold; }
+  h1, h2, h3, h1 a, h2 a, h3 a { color: #005A9C; }
+  table { border-collapse: collapse; }
+  td { border: 1px solid #999; padding: 3px }
+  dl p { margin-top: 0; }
+  dt { margin-top: 0.8em; }
+  dd { margin-left: 1.5em; }
+  ol { margin-bottom: 1em; }
+  table + p { margin-top: 1em; }
+  </style>
+</head>
+<body>
+<a href="http://github.com/gbv/service/"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png" alt="Fork me on GitHub"></a>
+<header>
+<h1 class="title">The Service Ontology</h1>
+<h3 class="author">Jakob Voß (VZG)</h3>
+<h4 class="date">2013-11-19 (version 0.1.0)</h4>
+</header>
+
+<h1>Table of Contents</h1>
+<nav id="TOC">
+<ul>
+<li><a href="#introduction"><span class="toc-section-number">1</span> Introduction</a><ul>
+<li><a href="#status-of-this-document"><span class="toc-section-number">1.1</span> Status of this document</a></li>
+<li><a href="#namespaces-and-ontology"><span class="toc-section-number">1.2</span> Namespaces and ontology</a></li>
+</ul></li>
+<li><a href="#overview"><span class="toc-section-number">2</span> Overview</a></li>
+<li><a href="#classes"><span class="toc-section-number">3</span> Classes</a><ul>
+<li><a href="#service"><span class="toc-section-number">3.1</span> Service</a></li>
+<li><a href="#serviceprovider"><span class="toc-section-number">3.2</span> ServiceProvider</a></li>
+<li><a href="#serviceconsumer"><span class="toc-section-number">3.3</span> ServiceConsumer</a></li>
+<li><a href="#servicelimitation"><span class="toc-section-number">3.4</span> ServiceLimitation</a></li>
+</ul></li>
+<li><a href="#properties"><span class="toc-section-number">4</span> Properties</a><ul>
+<li><a href="#provides"><span class="toc-section-number">4.1</span> provides</a></li>
+<li><a href="#providedby"><span class="toc-section-number">4.2</span> providedBy</a></li>
+<li><a href="#consumes"><span class="toc-section-number">4.3</span> consumes</a></li>
+<li><a href="#consumedby"><span class="toc-section-number">4.4</span> consumedBy</a></li>
+<li><a href="#limits"><span class="toc-section-number">4.5</span> limits</a></li>
+<li><a href="#limitedby"><span class="toc-section-number">4.6</span> limitedBy</a></li>
+<li><a href="#delay"><span class="toc-section-number">4.7</span> delay</a></li>
+<li><a href="#queue"><span class="toc-section-number">4.8</span> queue</a></li>
+</ul></li>
+<li><a href="#references"><span class="toc-section-number">5</span> References</a></li>
+</ul>
+</nav>
+<section class="level1" id="introduction">
+<h1><a href="#introduction"><span class="header-section-number">1</span> Introduction</a></h1>
+<p>The <strong>Service Ontology</strong> is a micro-ontology that defines the general concept of a service. The ontology is related to <a href="http://www.heppnetz.de/ontologies/goodrelations/">GoodRelations Vocabulary</a>, to <a href="http://schema.org">Schema.org Vocabulary</a>, and to <a href="http://dublincore.org/documents/dcmi-terms/">DCMI Metadata Terms</a>.</p>
+<section class="level2" id="status-of-this-document">
+<a id="Status of this document"></a><h2><a href="#status-of-this-document"><span class="header-section-number">1.1</span> Status of this document</a></h2>
+<p>This document and RDF serializations of the Service Ontology (<a href="service.ttl"><strong><code>service.ttl</code></strong></a> in RDF/Turtle and <a href="service.owl"><strong><code>service.owl</code></strong></a> in RDF/XML) are based on a source file written in Pandoc Markdown syntax, managed with <a href="http://jakobib.github.io/makespec/">makespec</a>. Sources and updates are available at <a href="http://github.com/gbv/service">http://github.com/gbv/service</a>.</p>
+<p>This is version 0.1.0, last modified at 2013-11-19 with revision <a href="http://github.com/gbv/service/commit/6b01ce45a0c7b09618c68216fe0931c5c3e1ca74">6b01ce4</a>.</p>
+<p>The current version of this ontology is a preliminary draft for open discussion. <a href="https://github.com/gbv/service/issues">Feedback</a> is welcome!</p>
+<p><strong>Revision history</strong></p>
+<ul>
+<li><a href="service-6b01ce4.html"><code>2013-11-19 09:34:13 +0100</code></a>: <a href="http://github.com/gbv/service/commit/6b01ce45a0c7b09618c68216fe0931c5c3e1ca74">initial draft, split from SSSO</a></li>
+</ul>
+</section>
+<section class="level2" id="namespaces-and-ontology">
+<a id="Namespaces and ontology"></a><h2><a href="#namespaces-and-ontology"><span class="header-section-number">1.2</span> Namespaces and ontology</a></h2>
+<p>The URI namespace of the Service Ontology is <a href="http://purl.org/ontology/service#">http://purl.org/ontology/service#</a>. The namespace prefix <code>service</code> is recommended. The URI of this ontology as a whole is <a href="http://purl.org/ontology/service">http://purl.org/ontology/service</a>.</p>
+<p>The following namespace prefixes are used to refer to related ontologies:</p>
+<pre><code>@prefix gr:      &lt;http://purl.org/goodrelations/v1#&gt; .
+@prefix schema:  &lt;http://schema.org/&gt; .
+@prefix owl:     &lt;http://www.w3.org/2002/07/owl#&gt; .
+@prefix rdfs:    &lt;http://www.w3.org/2000/01/rdf-schema#&gt; .
+@prefix dcterms: &lt;http://purl.org/dc/terms/&gt; .
+@prefix dctype:  &lt;http://purl.org/dc/dcmitype/&gt; .
+@prefix vann:    &lt;http://purl.org/vocab/vann/&gt; .
+@prefix voaf:    &lt;http://purl.org/vocommons/voaf#&gt; .
+@prefix foaf:    &lt;http://xmlns.com/foaf/0.1/&gt; .
+@prefix vs:      &lt;http://www.w3.org/2003/06/sw-vocab-status/ns#&gt; .
+@prefix xsd:     &lt;http://www.w3.org/2001/XMLSchema#&gt; .
+@prefix cc:      &lt;http://creativecommons.org/ns#&gt; .</code></pre>
+<p>The Service Ontology is defined in RDF/Turtle as following:</p>
+<pre><code>@prefix service: &lt;http://purl.org/ontology/service#&gt; .
+@base            &lt;http://purl.org/ontology/service&gt; .
+
+&lt;&gt; a owl:Ontology, voaf:Vocabulary ;
+    dcterms:title &quot;Service Ontology&quot;@en ;
+    vann:preferredNamespacePrefix &quot;service&quot; ;
+    vann:preferredNamespaceUri &quot;http://purl.org/ontology/service#&quot; ;
+    dcterms:description &quot;A micro-ontology that defines the general concept of a service.&quot;@en ; 
+    dcterms:modified &quot;2013-11-19&quot;^^xsd:date ;
+    owl:versionInfo &quot;0.1.0&quot; ;
+    cc:license &lt;http://creativecommons.org/licenses/by/3.0/&gt; ;
+    dcterms:creator &quot;Jakob Voß&quot; 
+.</code></pre>
+</section>
+</section>
+<section class="level1" id="overview">
+<h1><a href="#overview"><span class="header-section-number">2</span> Overview</a></h1>
+<p>The following diagram illustrates the classes and properties defined in the Service Ontology:</p>
+<pre class="ditaa"><code>
+     +-----------------+   provides     +---------------+   consumedBy   +-----------------+
+     | ServiceProvider |---------------&gt;|               |---------------&gt;| ServiceConsumer |
+     |                 |&lt;---------------|               |&lt;---------------|                 |
+     +-----------------+   providedBy   |               |   consumes     +-----------------+
+                                        |    Service    |
+   +-------------------+   limits       |               |   delay
+   | ServiceLimitation |---------------&gt;|               |-------------&gt; duration-or-time
+   |                   |&lt;---------------|               |-------------&gt; xsd:nonNegativeInteger
+   +-------------------+  limitedBy     |               |   queue
+                                        +---------------+</code></pre>
+<p>A <a href="#service">Service</a>, as defined by the Service Ontology is typically provided by a <a href="#serviceprovider">ServiceProvider</a> and/or consumed by a <a href="#serviceconsumer">ServiceConsumer</a>. Services may further be constraint by a <a href="#servicelimitation">ServiceLimitation</a>, by a <a href="#delay">delay</a> and/or by the length of waiting <a href="#queue">queue</a>.</p>
+</section>
+<section class="level1" id="classes">
+<h1><a href="#classes"><span class="header-section-number">3</span> Classes</a></h1>
+<section class="level2" id="service">
+<a id="Service"></a><h2><a href="#service"><span class="header-section-number">3.1</span> Service</a></h2>
+<p>A <strong>service</strong> is some action that is done for someone.</p>
+<p>Each instance of a Service is also an instance of <a href="http://purl.org/goodrelations/v1#ProductOrService">gr:ProductOrService</a> from <a href="http://www.heppnetz.de/ontologies/goodrelations/">GoodRelations Vocabulary</a>, <a href="http://schema.org/Product">schema:Product</a> from <a href="http://schema.org">Schema.org Vocabulary</a> and of <a href="http://dublincore.org/documents/dcmi-terms/#dcmitype-Service">dctype:Service</a> from the <a href="http://dublincore.org/documents/dcmi-terms/">DCMI Metadata Terms</a>.</p>
+<pre><code>service:Service a owl:Class ;
+    rdfs:label &quot;Service&quot;@en ;
+    rdfs:subClassOf gr:ProductOrService, dctype:Service ;
+    rdfs:seeAlso schema:Product ;
+    rdfs:isDefinedBy &lt;&gt; .</code></pre>
+<p>A service can be connected to one or more <a href="#serviceprovider">ServiceProvider</a> with property <a href="#providedBy">providedBy</a> and to one or more <a href="#serviceconsumer">ServiceConsumer</a> with property <a href="#consumedBy">consumedBy</a>.</p>
+</section>
+<section class="level2" id="serviceprovider">
+<a id="ServiceProvider"></a><h2><a href="#serviceprovider"><span class="header-section-number">3.2</span> ServiceProvider</a></h2>
+<p>A <strong>service provider</strong> is an entity that is responsible for providing a <a href="#service">Service</a>. Typical providers, such as organizations and people, are also instances of <a href="http://xmlns.com/foaf/spec/#term_Agent">foaf:Agent</a> and <a href="http://purl.org/goodrelations/v1#BusinessEntity">gr:BusinessEntity</a> but the Service Ontology does not put any constraints on the nature of providers.</p>
+<pre><code>service:ServiceProvider a owl:Class ;
+    rdfs:label &quot;ServiceProvider&quot;@en ;
+    rdfs:seeAlso foaf:Agent, gr:BusinessEntity ;
+    rdfs:isDefinedBy &lt;&gt; .</code></pre>
+</section>
+<section class="level2" id="serviceconsumer">
+<a id="ServiceConsumer"></a><h2><a href="#serviceconsumer"><span class="header-section-number">3.3</span> ServiceConsumer</a></h2>
+<p>A <strong>service consumer</strong> is an entity that requests or consumes a <a href="#service">Service</a>. Typical consumers, such as organizations and people, are instances of <a href="http://xmlns.com/foaf/spec/#term_Agent">foaf:Agent</a> and <a href="http://purl.org/goodrelations/v1#BusinessEntity">gr:BusinessEntity</a> but the Service Ontology does not put any constraints on the nature of consumers.</p>
+<pre><code>service:ServiceConsumer a owl:Class ;
+    rdfs:label &quot;ServiceConsumer&quot;@en ;
+    rdfs:seeAlso foaf:Agent, gr:BusinessEntity ;
+    rdfs:isDefinedBy &lt;&gt; .</code></pre>
+</section>
+<section class="level2" id="servicelimitation">
+<a id="ServiceLimitation"></a><h2><a href="#servicelimitation"><span class="header-section-number">3.4</span> ServiceLimitation</a></h2>
+<p>A <strong>service limitation</strong> is some obstacle that may limit the use of a <a href="#service">Service</a>. For instance the purchase of guns and drugs is limited to consumers with special permission. Another example is providing a different product or activity than originally requested. Services and limitations are connected to each other with properties <a href="#limits">limits</a> and <a href="#limitedBy">limitedBy</a>.</p>
+<pre><code>service:ServiceLimitation a owl:Class ;
+    rdfs:label &quot;ServiceLimitation&quot;@en ;
+    rdfs:isDefinedBy &lt;&gt; .</code></pre>
+</section>
+</section>
+<section class="level1" id="properties">
+<h1><a href="#properties"><span class="header-section-number">4</span> Properties</a></h1>
+<section class="level2" id="provides">
+<a id="provides"></a><h2><a href="#provides"><span class="header-section-number">4.1</span> provides</a></h2>
+<p>Relates a <a href="#serviceprovider">ServiceProvider</a> instance that <strong>provides</strong> a <a href="#service">Service</a> instance to this service.</p>
+<pre><code>service:provides a owl:ObjectProperty ;
+    rdfs:label &quot;provides&quot;@en ;
+    rdfs:domain service:ServiceProvider ;
+    rdfs:range service:Service ;
+    owl:inverseOf service:providedBy ;
+    rdfs:isDefinedBy &lt;&gt; .</code></pre>
+<p>The existence of a provides relationship between a <a href="#serviceprovider">ServiceProvider</a> and a <a href="#service">Service</a> often implies the existence of an offer (<a href="http://purl.org/goodrelations/v1#Offering">gr:Offering</a> and/or <a href="http://schema.org/Offer">schema:Offer</a>) but this implication is no mandatory part of the Service Ontology:</p>
+<pre><code>#   { ?p service:provides ?s } &lt;=&gt; 
+#   { ?p a gr:BusinessEntity ; 
+#        gr:offers [
+#          a gr:Offering , schema:Offer ;
+#          gr:includesObject ?s
+#       ]
+#   }</code></pre>
+</section>
+<section class="level2" id="providedby">
+<a id="providedBy"></a><h2><a href="#providedby"><span class="header-section-number">4.2</span> providedBy</a></h2>
+<p>Relates a <a href="#service">Service</a> instance that is <strong>provided by</strong> a <a href="#serviceprovider">ServiceProvider</a> instance to this service provider.</p>
+<pre><code>service:providedBy a owl:ObjectProperty ;
+    rdfs:label &quot;providedBy&quot;@en ;
+    rdfs:domain service:Service ;
+    rdfs:range service:ServiceProvider ;
+    owl:inverseOf service:provides ;
+    rdfs:isDefinedBy &lt;&gt; .</code></pre>
+</section>
+<section class="level2" id="consumes">
+<a id="consumes"></a><h2><a href="#consumes"><span class="header-section-number">4.3</span> consumes</a></h2>
+<p>Relates a <a href="#serviceconsumer">ServiceConsumer</a> instance that <strong>consumes</strong> a <a href="#service">Service</a> instance to this service.</p>
+<pre><code>service:consumes a owl:ObjectProperty ;
+    rdfs:label &quot;consumes&quot;@en ;
+    rdfs:domain service:ServiceConsumer ;
+    rdfs:range service:Service ;
+    owl:inverseOf service:consumedBy ;
+    rdfs:isDefinedBy &lt;&gt; .</code></pre>
+</section>
+<section class="level2" id="consumedby">
+<a id="consumedBy"></a><h2><a href="#consumedby"><span class="header-section-number">4.4</span> consumedBy</a></h2>
+<p>Relates a <a href="#service">Service</a> instance that is <strong>consumed by</strong> a <a href="#serviceconsumer">ServiceConsumer</a> instance to this service consumer.</p>
+<pre><code>service:consumedBy a owl:ObjectProperty ;
+    rdfs:label &quot;consumedBy&quot;@en ;
+    rdfs:domain service:Service ;
+    rdfs:range service:ServiceConsumer ;
+    owl:inverseOf service:consumes ;
+    rdfs:isDefinedBy &lt;&gt; .</code></pre>
+</section>
+<section class="level2" id="limits">
+<a id="limits"></a><h2><a href="#limits"><span class="header-section-number">4.5</span> limits</a></h2>
+<p>Relates a <a href="#servicelimitation">ServiceLimitation</a> instance that <strong>limits</strong> a <a href="#service">Service</a> instance to this service.</p>
+<pre><code>service:limits a owl:ObjectProperty ;
+    rdfs:label &quot;limits&quot;@en ;
+    rdfs:domain service:ServiceLimitation ;
+    rdfs:range service:Service ;
+    owl:inverseOf service:limitedBy ;
+    rdfs:isDefinedBy &lt;&gt; .</code></pre>
+</section>
+<section class="level2" id="limitedby">
+<a id="limitedBy"></a><h2><a href="#limitedby"><span class="header-section-number">4.6</span> limitedBy</a></h2>
+<p>Relates a <a href="#service">Service</a> instance that is <strong>limited by</strong> a <a href="#servicelimitation">ServiceLimitation</a> instance to this service limitation.</p>
+<pre><code>service:limitedBy a owl:ObjectProperty ;
+    rdfs:label &quot;limitedBy&quot;@en ;
+    rdfs:domain service:Service ;
+    rdfs:range service:ServiceLimitation ;
+    owl:inverseOf service:limits ;
+    rdfs:isDefinedBy &lt;&gt; .</code></pre>
+</section>
+<section class="level2" id="delay">
+<a id="delay"></a><h2><a href="#delay"><span class="header-section-number">4.7</span> delay</a></h2>
+<p>This property can be used to specify an <strong>estimated period of time or a date</strong> when a delayed <a href="#service">Service</a> is expected to take place. Applications SHOULD use values in the range of <a href="http://www.w3.org/TR/xmlschema-2/#duration">xsd:duration</a>, <a href="http://www.w3.org/TR/xmlschema-2/#date">xsd:date</a>, <a href="http://www.w3.org/TR/xmlschema-2/#dateTime">xsd:dateTime</a>, or the special value “unknown” to indicate a significant delay of unknown duration. The range may later be extended to a subset of Extended <a href="http://www.loc.gov/standards/datetime/">Date/Time Format</a> (EDTF).</p>
+<pre><code>service:delay a owl:DatatypeProperty ;
+    rdfs:label &quot;delay&quot;@en ;
+    rdfs:domain service:Service ;
+    rdfs:seeAlso xsd:duration , xsd:date, xsd:dateTime ;
+    rdfs:isDefinedBy &lt;&gt; .</code></pre>
+<p>Applications SHOULD NOT use this property to specify the normal time of service. An example of a service with delay is a concert that starts at an official time (normal time) but there is a delay until band begins to play (delayed time).</p>
+</section>
+<section class="level2" id="queue">
+<a id="queue"></a><h2><a href="#queue"><span class="header-section-number">4.8</span> queue</a></h2>
+<p>This property can be used to indicate the <strong>size of a waiting queue</strong> for some <a href="#service">Service</a>. Its value MUST be a non-negative integer (0,1,2…).</p>
+<pre><code>service:queue a owl:DatatypeProperty ;
+    rdfs:label &quot;queue&quot;@en ;
+    rdfs:domain service:Service ;
+    rdfs:range xsd:nonNegativeInteger ;
+    rdfs:isDefinedBy &lt;&gt; .</code></pre>
+</section>
+</section>
+<section class="level1" id="references">
+<h1><a href="#references"><span class="header-section-number">5</span> References</a></h1>
+<ul>
+<li><p>S. Bradner: <em>Key words for use in RFCs to Indicate Requirement Levels</em>. RFC 2119, March 1997 <a href="http://tools.ietf.org/html/rfc2119">http://tools.ietf.org/html/rfc2119</a>.</p></li>
+<li><p><em>Schema.org Vocabular</em>. <a href="http://schema.org/">http://schema.org/</a>.</p></li>
+<li><p><em>GoodRelations Vocabulary</em>. <a href="http://purl.org/goodrelations/">http://purl.org/goodrelations/</a>.</p></li>
+<li><p><em>DCMI Metadata Terms</em>. <a href="http://dublincore.org/documents/dcmi-terms/">http://dublincore.org/documents/dcmi-terms/</a>.</p></li>
+</ul>
+</section>
+</body>
+</html>
