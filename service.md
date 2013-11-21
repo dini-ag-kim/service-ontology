@@ -11,13 +11,13 @@ This document and RDF serializations of the Service Ontology
 [**`service.owl`**](service.owl) in RDF/XML) are based on a source
 file written in Pandoc Markdown syntax, managed with 
 [makespec](http://jakobib.github.io/makespec/). Sources and updates are
-available at <http://github.com/gbv/service>.
+available at <http://github.com/dini-ag-kim/service-ontology>.
 
 This is version {VERSION}, last modified at {GIT_REVISION_DATE} with revision
 {GIT_REVISION_HASH}.
 
 The current version of this ontology is a preliminary draft for open
-discussion. [Feedback](https://github.com/gbv/service/issues) is welcome!
+discussion. [Feedback](https://github.com/dini-ag-kim/service-ontology/issues) is welcome!
 
 **Revision history**
 
