@@ -17,12 +17,12 @@
     cc:license <http://creativecommons.org/licenses/by/3.0/> ;
     dcterms:creator "Jakob Voß" ;
     dcterms:description "A micro-ontology that defines the general concept of a service."@en ;
-    dcterms:modified "2013-11-19"^^xsd:date ;
+    dcterms:modified "2013-11-21"^^xsd:date ;
     dcterms:title "Service Ontology"@en ;
     vann:preferredNamespacePrefix "service" ;
     vann:preferredNamespaceUri "http://purl.org/ontology/service#" ;
     a voaf:Vocabulary, owl:Ontology ;
-    owl:versionInfo "0.1.0" .
+    owl:versionInfo "0.1.0rev1" .
 
 service:Service
     a owl:Class ;
