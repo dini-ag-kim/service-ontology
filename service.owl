@@ -22,7 +22,7 @@
     <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2013-11-21</dcterms:modified>
   </rdf:Description>
   <rdf:Description rdf:about="http://purl.org/ontology/service">
-    <owl:versionInfo>0.1.0rev1</owl:versionInfo>
+    <owl:versionInfo>0.1.0rev2</owl:versionInfo>
   </rdf:Description>
   <rdf:Description rdf:about="http://purl.org/ontology/service">
     <cc:license rdf:resource="http://creativecommons.org/licenses/by/3.0/"/>

@@ -22,7 +22,7 @@
     vann:preferredNamespacePrefix "service" ;
     vann:preferredNamespaceUri "http://purl.org/ontology/service#" ;
     a voaf:Vocabulary, owl:Ontology ;
-    owl:versionInfo "0.1.0rev1" .
+    owl:versionInfo "0.1.0rev2" .
 
 service:Service
     a owl:Class ;
