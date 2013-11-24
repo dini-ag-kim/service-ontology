@@ -2,7 +2,7 @@
 
 The **Service Ontology** is a micro-ontology that defines the general concept
 of a service. The ontology is related to [GoodRelations Vocabulary], to
-[Schema.org Vocabulary], and to [DCMI Metadata Terms].
+[Schema.org Vocabulary], to [DCMI Metadata Terms], and to [FOAF Vocabulary].
 
 ## Status of this document
 
@@ -16,8 +16,8 @@ available at <http://github.com/dini-ag-kim/service-ontology>.
 This is version {VERSION}, last modified at {GIT_REVISION_DATE} with revision
 {GIT_REVISION_HASH}.
 
-The current version of this ontology is a preliminary draft for open
-discussion. [Feedback](https://github.com/dini-ag-kim/service-ontology/issues) is welcome!
+The current version of this ontology is a draft for open discussion.
+[Feedback](https://github.com/dini-ag-kim/service-ontology/issues) is welcome!
 
 **Revision history**
 
@@ -94,48 +94,53 @@ waiting [queue].
 A **service** is some action that is done for someone.
 
 Each instance of a Service is also an instance of [gr:ProductOrService] from
-[GoodRelations Vocabulary], [schema:Product] from [Schema.org Vocabulary] and
-of [dctype:Service] from the [DCMI Metadata Terms].
+[GoodRelations Vocabulary] and [dctype:Service] from [DCMI Metadata Terms]. A
+service can be connected to one or more [ServiceProvider] with property
+[providedBy] and to one or more [ServiceConsumer] with property [consumedBy].
 
     service:Service a owl:Class ;
         rdfs:label "Service"@en ;
         rdfs:subClassOf gr:ProductOrService, dctype:Service ;
-        rdfs:seeAlso schema:Product ;
+        rdfs:seeAlso schema:Service, schema:Product ;
         rdfs:isDefinedBy <> .
 
-A service can be connected to one or more [ServiceProvider] with property
-[providedBy] and to one or more [ServiceConsumer] with property [consumedBy].
-
-[dctype:Service]: http://dublincore.org/documents/dcmi-terms/#dcmitype-Service
-
+Most services are also instance of [schema:Product] and/or [schema:Service]
+from [Schema.org Vocabulary].
 
 ## ServiceProvider
 
 [ServiceProvider]: #serviceprovider
 
 A **service provider** is an entity that is responsible for providing a
-[Service].  Typical providers, such as organizations and people, are also
-instances of [foaf:Agent] and [gr:BusinessEntity] but the Service Ontology does
-not put any constraints on the nature of providers.
+[Service].
 
     service:ServiceProvider a owl:Class ;
         rdfs:label "ServiceProvider"@en ;
-        rdfs:seeAlso foaf:Agent, gr:BusinessEntity ;
+        rdfs:seeAlso foaf:Agent, dctype:Agent, gr:BusinessEntity, 
+            schema:Person, schema:Organization ;
         rdfs:isDefinedBy <> .
+
+Typical providers, such as organizations and people, are also instances of
+[foaf:Agent], [dctype:Agent], [gr:BusinessEntity], and [schema:Person] or
+[schema:Organization] but the Service Ontology does not put any constraints on
+the nature of providers.
 
 ## ServiceConsumer
 
 [ServiceConsumer]: #serviceconsumer
 
 A **service consumer** is an entity that requests or consumes a [Service].
-Typical consumers, such as organizations and people, are instances of
-[foaf:Agent] and [gr:BusinessEntity] but the Service Ontology does not put any
-constraints on the nature of consumers.
 
     service:ServiceConsumer a owl:Class ;
         rdfs:label "ServiceConsumer"@en ;
-        rdfs:seeAlso foaf:Agent, gr:BusinessEntity ;
+        rdfs:seeAlso foaf:Agent, dctype:Agent, gr:BusinessEntity, 
+            schema:Person, schema:Organization ;
         rdfs:isDefinedBy <> .
+
+Typical consumers, such as organizations and people, are instances of
+[foaf:Agent], [dctype:Agent], [gr:BusinessEntity], [schema:Person],
+[schema:Organization], or [schema:Audience] but the Service Ontology does not
+put any constraints on the nature of consumers.
 
 ## ServiceLimitation
 
@@ -157,8 +162,8 @@ connected to each other with properties [limits] and [limitedBy].
 
 [provides]: #provides
 
-Relates a [ServiceProvider] instance that **provides** a [Service]
-instance to this service.
+Relates a [ServiceProvider] instance that **provides** a [Service] instance to
+this service.
 
     service:provides a owl:ObjectProperty ;
         rdfs:label "provides"@en ;
@@ -187,13 +192,15 @@ Ontology:
 [providedBy]: #providedBy
 
 Relates a [Service] instance that is **provided by** a [ServiceProvider]
-instance to this service provider.
+instance to this service provider. In most cases this property can be used
+interchangeable with [schema:provider].
 
     service:providedBy a owl:ObjectProperty ;
         rdfs:label "providedBy"@en ;
         rdfs:domain service:Service ;
         rdfs:range service:ServiceProvider ;
         owl:inverseOf service:provides ;
+        rdfs:seeAlso schema:provider ;
         rdfs:isDefinedBy <> .
 
 ## consumes
@@ -222,7 +229,11 @@ instance to this service consumer.
         rdfs:domain service:Service ;
         rdfs:range service:ServiceConsumer ;
         owl:inverseOf service:consumes ;
+        rdfs:seeAlso schema:serviceAudience ;
         rdfs:isDefinedBy <> .
+
+Typical properties that can be used together with this property include
+[schema:serviceAudience] and [gr:isConsumableFor].
 
 ## limits
 
@@ -291,7 +302,6 @@ This property can be used to indicate the **size of a waiting queue** for some
         rdfs:range xsd:nonNegativeInteger ;
         rdfs:isDefinedBy <> .
 
-
 # References
 
 * S. Bradner: *Key words for use in RFCs to Indicate Requirement Levels*.
@@ -307,17 +317,31 @@ This property can be used to indicate the **size of a waiting queue** for some
 * *DCMI Metadata Terms*.
   <http://dublincore.org/documents/dcmi-terms/>.
 
-[Schema.org Vocabulary]: http://schema.org
-[GoodRelations Vocabulary]: http://www.heppnetz.de/ontologies/goodrelations/
-[DCMI Metadata Terms]: http://dublincore.org/documents/dcmi-terms/
+* *FOAF Vocabulary*.
+  <http://xmlns.com/foaf/spec/>.
 
+[DCMI Metadata Terms]: http://dublincore.org/documents/dcmi-terms/
+[dctype:Service]: http://dublincore.org/documents/dcmi-terms/#dcmitype-Service
+[dctype:Agent]: http://dublincore.org/documents/dcmi-terms/#dcmitype-Agent
+
+[FOAF Vocabulary]: http://xmlns.com/foaf/spec/
 [foaf:Agent]: http://xmlns.com/foaf/spec/#term_Agent
+
+[GoodRelations Vocabulary]: http://www.heppnetz.de/ontologies/goodrelations/
 [gr:BusinessEntity]: http://purl.org/goodrelations/v1#BusinessEntity
 [gr:Offering]: http://purl.org/goodrelations/v1#Offering
 [gr:ProductOrService]: http://purl.org/goodrelations/v1#ProductOrService
 [gr:offers]: http://purl.org/goodrelations/v1#offers
 [gr:seeks]: http://purl.org/goodrelations/v1#seeks
+[gr:isConsumableFor]: http://purl.org/goodrelations/v1#isConsumableFor
 
+[Schema.org Vocabulary]: http://schema.org
 [schema:Product]: http://schema.org/Product
+[schema:Service]: http://schema.org/Service
 [schema:Offer]: http://schema.org/Offer
+[schema:Person]: http://schema.org/Person
+[schema:Organization]: http://schema.org/Organization
+[schema:provider]: http://schema.org/Provider
+[schema:serviceAudience]: http://schema.org/serviceAudience
+[schema:Audience]: http://schema.org/Audience
 
