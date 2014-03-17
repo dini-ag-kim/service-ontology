@@ -344,7 +344,7 @@ This property relates a [Service] to a thing, which is the object of that servic
 
 This property relates a thing to a [Service], which is provided on that thing.
 
-    service:includes a owl:ObjectProperty ;
+    service:includedIn a owl:ObjectProperty ;
         rdfs:label "included in"@en ;
         rdfs:range service:Service ;
         owl:inverseOf service:includes ;
