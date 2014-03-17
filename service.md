@@ -326,6 +326,30 @@ This property can be used to indicate the **size of a waiting queue** for some
         rdfs:range xsd:nonNegativeInteger ;
         rdfs:isDefinedBy <> .
 
+## includes
+
+[includes]: #includes
+
+This property relates a [Service] to a thing, which is the object of that service.
+
+    service:includes a owl:ObjectProperty ;
+        rdfs:label "includes"@en ;
+        rdfs:domain service:Service ;
+        owl:inverseOf service:includedIn ;
+        rdfs:isDefinedBy <> .
+
+## includedIn
+
+[includedIn]: #includedin
+
+This property relates a thing to a [Service], which is provided on that thing.
+
+    service:includes a owl:ObjectProperty ;
+        rdfs:label "included in"@en ;
+        rdfs:range service:Service ;
+        owl:inverseOf service:includes ;
+        rdfs:isDefinedBy <> .
+
 # References
 
 * S. Bradner: *Key words for use in RFCs to Indicate Requirement Levels*.
