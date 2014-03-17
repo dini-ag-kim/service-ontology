@@ -69,15 +69,26 @@ Service Ontology:
 ``` {.ditaa}
 
      +-----------------+   provides     +---------------+   consumedBy   +-----------------+
-     | ServiceProvider |--------------->|               |--------------->| ServiceConsumer |
-     |                 |<---------------|               |<---------------|                 |
+     | ServiceProvider |--------------->|               +--------------->| ServiceConsumer |
+     |                 |<---------------+               |<---------------|                 |
      +-----------------+   providedBy   |               |   consumes     +-----------------+
                                         |    Service    |
    +-------------------+   limits       |               |   delay
-   | ServiceLimitation |--------------->|               |-------------> duration-or-time
-   |                   |<---------------|               |-------------> xsd:nonNegativeInteger
+   | ServiceLimitation |--------------->|               +-------------> duration-or-time
+   |                   |<---------------+               +-------------> xsd:nonNegativeInteger
    +-------------------+  limitedBy     |               |   queue
+                                        +--+------------+
+                                           |         ^
+                                           |         |
+                                        includes includedIn
+                                           |         |
+                                           v         |
+                                        +------------+--+
+                                        |               |
+                                        | ServiceObject |
+                                        |               |
                                         +---------------+
+                                         
 ```
 
 A [Service], as defined by the Service Ontology is typically provided by a
@@ -154,6 +165,19 @@ connected to each other with properties [limits] and [limitedBy].
 
     service:ServiceLimitation a owl:Class ;
         rdfs:label "ServiceLimitation"@en ;
+        rdfs:isDefinedBy <> .
+
+## ServiceObject
+
+[ServiceObject]: #serviceobject
+
+A **service object** is what the service is provided for. As an example, in the sentence "Peter is lending a car", the 'car' is the object of the service 'loan'.
+
+Use property [includes] to state that a thing is the object of a service. Use property [includedIn] to state that a service is provided for an object.
+
+    service:ServiceObject a owl:Class ;
+        rdfs:label "service object"@en ;
+        rdfs:comment "The thing which is the object of a service"@en ;
         rdfs:isDefinedBy <> .
 
 # Properties
